@@ -18,6 +18,7 @@ namespace WebApplication1
                 if (con == "")
                 {
                     throw new Exception("Problem with Connecting DB");
+                    
                 }
                 options.UseSqlServer(con);
 
