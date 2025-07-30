@@ -1,0 +1,11 @@
+﻿@using WebApplication1.Services
+@inject IUserUtils userUtils
+@using WebApplication1.Data.Entites
+<ol>
+	@foreach (User user in userUtils.GetAllUsers())
+	{
+		<li>
+			@user.userame
+		</li>	
+	}
+</ol>

@@ -1,0 +1,49 @@
+﻿using System.Linq.Expressions;
+using WebApplication1.Data;
+using WebApplication1.Data.Entites;
+
+namespace WebApplication1.Services.Implementations
+{
+    public class UserUtils : IUserUtils
+    {
+        public AppllContext appllContext { get; set; }
+
+        public UserUtils(AppllContext appllContext)
+        {
+            this.appllContext = appllContext;
+        }
+
+        public IList<User> GetAllUsers()
+        {
+            return appllContext.Users.ToList();
+        }
+
+        public User? GetUserByEmail(string email)
+        {
+           return appllContext.Users.First(a =>  a.email == email);
+        }
+
+        public User? GetUserById(int id)
+        {
+            return appllContext.Users.Find(id);
+        }
+
+        public User? GetUserByLogin(string login)
+        {
+            return appllContext.Users.First(a => a.userame == login);
+        }
+
+
+        public IList<User> GetUsersWhere(Expression<Func<User, bool>> expression)
+        {
+            return appllContext.Users.Where(expression).ToList();
+        }
+
+        public void CreateUser(string username, string password, string email)
+        {
+            User user = new User { userame = username, email = email, password = password };
+            appllContext.Users.Add(user);
+            appllContext.SaveChanges();
+        }
+    }
+}
