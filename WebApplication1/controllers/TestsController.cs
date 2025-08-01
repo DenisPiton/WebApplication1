@@ -1,18 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Text;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace WebApplication1.controllers
 {
-
-    public class HomeController : Controller
+    public class IndexController : Controller
     {
 
         public IActionResult Index()
         {
             return View();
         }
-        
-
-
     }
 }
