@@ -1,11 +1,13 @@
-﻿@using WebApplication1.Services
-@inject IUserUtils userUtils
-@using WebApplication1.Data.Entites
-<ol>
-	@foreach (User user in userUtils.GetAllUsers())
-	{
-		<li>
-			@user.userame
-		</li>	
-	}
-</ol>
+﻿@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>
+	<form method="post">
+		<input name="email_or">
+		<br>
+		<input name="password">
+		<br>
+		<input type="submit">
+	</form>
+<h1>

@@ -9,7 +9,7 @@ namespace WebApplication1.Data.Entites
     {
         public int id { get; set; }
 
-        
+
         public required string userame { get; set; }
         public required string email { get; set; }
         public required string password { get; set; }
@@ -19,6 +19,7 @@ namespace WebApplication1.Data.Entites
         public int best_time { get; set; } = -1;
 
         public int test_passed { get; set; } = 0;
+        public bool IsAdmib { get; set; } = false;
 
 
     }

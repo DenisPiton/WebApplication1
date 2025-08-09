@@ -57,6 +57,9 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<bool>("IsAdmib")
+                        .HasColumnType("bit");
+
                     b.Property<int>("best_time")
                         .HasColumnType("int");
 

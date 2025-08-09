@@ -8,6 +8,7 @@
 *.suo
 appsettings.json
 wwwroot
+Migrations
 *.user
 *.userosscache
 *.sln.docstates
