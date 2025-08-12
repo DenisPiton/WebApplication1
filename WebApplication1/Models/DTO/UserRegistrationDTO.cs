@@ -6,6 +6,7 @@ namespace WebApplication1.Models.DTO
     {
         [Required]
         [MaxLength(100, ErrorMessage = "Your username is too long")]
+        [UniqueLogin]
         public required string username { get; set; }
         [Required(ErrorMessage = "Please set your password")]
         [DataType(DataType.Password)]

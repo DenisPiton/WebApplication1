@@ -20,7 +20,12 @@ namespace WebApplication1.Services.Implementations
 
         public User? GetUserByEmail(string email)
         {
-           return appllContext.Users.First(a =>  a.email == email);
+            
+            if (appllContext.Users.Any(a => a.email == email))
+            {
+                return appllContext.Users.First(a => a.email == email);
+            }
+            else return null;
         }
 
         public User? GetUserById(int id)
@@ -35,7 +40,7 @@ namespace WebApplication1.Services.Implementations
                 return appllContext.Users.First(a => a.userame == login);
             }
             else return null;
-            
+
         }
 
 
@@ -55,6 +60,10 @@ namespace WebApplication1.Services.Implementations
         public bool AnyUsersByEmail(string email)
         {
             return appllContext.Users.Any(a => a.email == email);
+        }
+        public bool AnyUserByLogin(string username)
+        {
+            return appllContext.Users.Any(a => a.userame == username);
         }
     }
 }

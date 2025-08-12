@@ -1,6 +1,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml"></partial>
 @using WebApplication1.Models.DTO;
 @model UserRegistrationDTO;
 <div class="min-h-screen grid items-center bg-gray-900">
@@ -11,11 +12,13 @@
             <div class="mb-6">
                 <label class="text-gray-200 block mb-2">Email</label>
                 <input asp-for="email" class="transition-all duration-200 bg-gray-700 p-2 outline-none rounded-md text-white  w-full h-10 focus:border-2 border-sky-500 " type="email" placeholder="example@somemail.com">
+                <span asp-validation-for="email" class="text-red-500 text-size-xs font-[6px]"></span>
             </div>
 
             <div class="mb-6">
                 <label class="text-gray-200 block mb-2">Login</label>
                 <input asp-for="username" class="transition-all duration-200 bg-gray-700 p-2 outline-none rounded-md text-white  w-full h-10 focus:border-2 border-sky-500 " type="text" placeholder="SomeName123" >
+                <span asp-validation-for="username" class="text-red-500 text-size-xs font-[6px]"></span>
             </div>
             <div class="mb-6">
                 <label class="text-gray-200 block mb-2">Password</label>

@@ -5,27 +5,27 @@ using WebApplication1.Services.Implementations;
 namespace WebApplication1.CustomAttributes
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-    public class UniqueEmail : ValidationAttribute
+    public class UniqueLogin : ValidationAttribute
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
             IUserUtils? utils = validationContext.GetService<IUserUtils>();
-            string? email = value as string;
-            if (utils != null && email != null)
+            string? username = value as string;
+            if (utils != null && username != null)
             {
 
-                if (!utils.AnyUsersByEmail(email))
+                if (!utils.AnyUserByLogin(username))
                 {
                     return ValidationResult.Success;
                 }
                 else
                 {
-                    return new ValidationResult(ErrorMessage ?? "This email is already used");
+                    return new ValidationResult(ErrorMessage ?? "Имя уже занято");
                 }
             }
-            else if (string.IsNullOrEmpty(email))
+            else if (string.IsNullOrEmpty(username))
             {
-                return new ValidationResult(ErrorMessage ?? "Вы не указали Почту");
+                return new ValidationResult(ErrorMessage ?? "Вы не указали имя пользователя");
             }
             else
             {

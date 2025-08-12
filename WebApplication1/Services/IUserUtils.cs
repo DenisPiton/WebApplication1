@@ -16,6 +16,6 @@ namespace WebApplication1.Services
         User CreateUser(string username, string password, string email);
 
         bool AnyUsersByEmail(string email);
-        
+        bool AnyUserByLogin(string login);
     }
 }
