@@ -30,7 +30,12 @@ namespace WebApplication1.Services.Implementations
 
         public User? GetUserByLogin(string login)
         {
-            return appllContext.Users.First(a => a.userame == login);
+            if (appllContext.Users.Any(a => a.userame == login))
+            {
+                return appllContext.Users.First(a => a.userame == login);
+            }
+            else return null;
+            
         }
 
 
@@ -39,11 +44,17 @@ namespace WebApplication1.Services.Implementations
             return appllContext.Users.Where(expression).ToList();
         }
 
-        public void CreateUser(string username, string password, string email)
+        public User CreateUser(string username, string password, string email)
         {
             User user = new User { userame = username, email = email, password = password };
             appllContext.Users.Add(user);
             appllContext.SaveChanges();
+            return appllContext.Users.Where(a => a.userame == user.userame).First();
+        }
+
+        public bool AnyUsersByEmail(string email)
+        {
+            return appllContext.Users.Any(a => a.email == email);
         }
     }
 }

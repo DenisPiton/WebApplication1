@@ -13,6 +13,9 @@ namespace WebApplication1.Services
         User? GetUserByEmail(string email);
         User? GetUserByLogin(string login);
 
-        void CreateUser(string username,string password, string email);
+        User CreateUser(string username, string password, string email);
+
+        bool AnyUsersByEmail(string email);
+        
     }
 }

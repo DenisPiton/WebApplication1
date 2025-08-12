@@ -1,0 +1,58 @@
+﻿@{
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	
+}
+@using Microsoft.AspNetCore.Components
+@using WebApplication1.Models.DTO
+@using WebApplication1.Services;
+@using WebApplication1.Data.Entites;
+
+@model UserDTO;
+
+<div class="bg-gray-900 flex items-center justify-center min-h-screen">
+    <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl text-white text-center mb-6">Вход в Аккаунт</h2>
+        
+        <form asp-controller="Auth" asp-action="Index" method="post">
+
+            <div class="mb-4">
+                <label class="block text-gray-300 mb-2" for="email">Войти</label>
+                <input class="inp" type="email"  placeholder="Введите свою электронную почту" asp-for="email_or">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-300 mb-2"  name="password">Пароль</label>
+                <input class="inp" type="password" asp-for="password"placeholder="Введите пароль" required>
+            </div>
+            <button class="butun" type="submit">Войти</button>
+        </form>
+        <div class="mt-4 text-center">
+            <a class="text-blue-400 hover:underline" href="#">Забыли Пароль?</a>
+        </div>
+        <div class="mt-4 text-center">
+            <p class="text-gray-400">Нет Аккаунта?</p><a class="text-blue-400 hover:underline" asp-action="Reg">Зарегистрироваться</a></p>
+        </div>
+    </div>
+</div>
+
+
+
+@* 
+<h1>
+	<form asp-controller="Home" asp-action="Index" method="post">
+		<input asp-for="email_or">
+		<br>
+		<input asp-for="password" type="text" >
+		<br>
+		<Button type="submit">akjsd</Button>
+	</form>
+	<br>
+	<ol>
+		@foreach(User i in a.GetAllUsers()){
+			<h1>
+				@i.userame;
+			</h1>
+			<br>
+		}
+	</ol>
+
+<h1> *@

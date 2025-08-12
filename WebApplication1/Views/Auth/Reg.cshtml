@@ -1,0 +1,31 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using WebApplication1.Models.DTO;
+@model UserRegistrationDTO;
+<div class="min-h-screen grid items-center bg-gray-900">
+    <div class="bg-gray-800 w-96 rounded-lg p-7 place-self-center">
+        <h1 class="text-white text-2xl mb-6 text-center">Register a new account</h1>
+        <form method="post" asp-action="Reg" asp-controller="Auth">
+            
+            <div class="mb-6">
+                <label class="text-gray-200 block mb-2">Email</label>
+                <input asp-for="email" class="transition-all duration-200 bg-gray-700 p-2 outline-none rounded-md text-white  w-full h-10 focus:border-2 border-sky-500 " type="email" placeholder="example@somemail.com">
+            </div>
+
+            <div class="mb-6">
+                <label class="text-gray-200 block mb-2">Login</label>
+                <input asp-for="username" class="transition-all duration-200 bg-gray-700 p-2 outline-none rounded-md text-white  w-full h-10 focus:border-2 border-sky-500 " type="text" placeholder="SomeName123" >
+            </div>
+            <div class="mb-6">
+                <label class="text-gray-200 block mb-2">Password</label>
+                <input asp-for="password" class="transition-all duration-200 bg-gray-700 p-2 outline-none rounded-md text-white  w-full h-10 focus:border-2 border-sky-500 " type="password" placeholder="Password" >
+            </div>
+            <div class="place-self-center">
+                <button type="submit" class="bg-blue-600 p-3 w-32 rounded-md focus:bg-blue-700 text-white">Отправить</button>
+            </div>
+
+        </form>
+        
+    </div>
+</div>

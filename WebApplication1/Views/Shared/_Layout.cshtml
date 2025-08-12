@@ -6,8 +6,48 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>OLOLOLO</title>
         <meta name="description" content="">
+        <script src="https://cdn.jsdelivr.net/npm/@@tailwindcss/browser@4"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+        <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .inp
+        {
+            padding: 10px;
+            border-radius: 3px;
+            width: 100%;
+            background-color: #374151;
+            border:0px solid #000;
+            transition: border 0.2s;
+            color: white;
+        }
+        .inp:focus
+        {
+            border: 2px solid #0077ff;
+            outline: none;
+        }
+        .butun
+        {
+            padding: 10px;
+            border-radius: 3px;
+            width: 100%;
+            background-color: #0077ff;
+            transition: background-color 0.3s, border 0.1s;
+            color: white;
+
+        }
+        .butun:hover
+        {
+            background-color: #005fcb;
+        }
+        .butun:focus
+        {
+            border: 2px solid #0077ff;
+        }
+    </style>
     </head>
     <body>
         @RenderBody()

@@ -1,6 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
+using WebApplication1.Filters;
 using WebApplication1.Services;
 using WebApplication1.Services.Implementations;
 namespace WebApplication1
@@ -10,7 +11,11 @@ namespace WebApplication1
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(optins=>
+            {
+                optins.Filters.Add<CurrentUser>();
+            });
+            builder.Services.AddSession();
 
             builder.Services.AddDbContext<AppllContext>(options =>
             {
@@ -30,7 +35,8 @@ namespace WebApplication1
 
             var app = builder.Build();
             app.UseStaticFiles();
-            app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
+            app.UseSession();
+            app.MapControllerRoute("default", "{controller=Auth}/{action=Index}");
 
             
             
