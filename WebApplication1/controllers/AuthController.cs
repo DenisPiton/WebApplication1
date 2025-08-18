@@ -22,19 +22,24 @@ namespace WebApplication1.controllers
         [HttpPost]
         public IActionResult Index([FromForm] UserDTO DTO)
         {
-            User? user = utils.GetUsersWhere(a => a.userame == DTO.email_or && a.password == DTO.password).IsNullOrEmpty() ? null : utils.GetUsersWhere(a => a.userame == DTO.email_or && a.password == DTO.password).First();
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                ISession ses = HttpContext.Session;
-                ses.SetInt32("User_id", user.id);
-
-                return Redirect("/Tests/Main");
-
-
+                User? user = utils.GetUserByEmail(DTO.email_or);
+                if (user.password == DTO.password)
+                {
+                    ISession ses = HttpContext.Session;
+                    ses.SetInt32("User_id", user.id);
+                    return RedirectToAction("Main", "Tests");
+                }
+                else
+                {
+                    return View(DTO);
+                }
+                
             }
             else
             {
-                return Redirect("/Auth/Reg");
+                return View(DTO);
             }
 
         }

@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-
+using WebApplication1.CustomAttributes;
 namespace WebApplication1.Models.DTO
 {
     public class UserDTO
@@ -8,11 +8,11 @@ namespace WebApplication1.Models.DTO
         [MaxLength(240)]
         [Required(ErrorMessage = "Это поле обязательно")]
         [EmailAddress(ErrorMessage = "Адрес недействителен")]
-               
-        public string? email_or { get; set; }
+        [EmailExist]
+        public required string? email_or { get; set; }
         [Required(ErrorMessage = "Это поле обязательно" )]
         [MaxLength(100)]
         
-        public string? password { get; set; }
+        public required string? password { get; set; }
     }
 }
