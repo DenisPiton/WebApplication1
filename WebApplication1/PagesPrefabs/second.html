@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Exercise</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="/src/output.css"></link>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white ">
+    <header class="bg-gray-800 p-6 hidden sm:display">
+        <h1 class="text-3xl font-bold text-center">Упражнение для памяти</h1>
+        <nav class="mt-4 flex justify-center space-x-4">
+            <a href="/profile" class="text-gray-300 hover:text-blue-400">Профиль</a>
+            <a href="/test" class="text-gray-300 hover:text-blue-400">Упражнения</a>
+            <a href="/leaderboard" class="text-gray-300 hover:text-blue-400">Таблица лидеров</a>
+            <a href="/about" class="text-gray-300 hover:text-blue-400">О проекте</a>
+        </nav>
+    </header>
+    
+    <header class="p-4 z-100 mb-6 w-full h-15 place-self-center sticky  top-0 right-0 left-0 rounded-lg justify-items-stretch display sm:hidden ">
+        <div class="  backdrop-blur-md grid grid-cols-2 w-full h-15 p-2 bg-gray-800">
+            <div>
+                <a href="/profile">
+                    <svg class="w-10 h-10  text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-8-5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm1.942 4a3 3 0 0 0-2.847 2.051l-.044.133-.004.012c-.042.126-.055.167-.042.195.006.013.02.023.038.039.032.025.08.064.146.155A1 1 0 0 0 6 17h6a1 1 0 0 0 .811-.415.713.713 0 0 1 .146-.155c.019-.016.031-.026.038-.04.014-.027 0-.068-.042-.194l-.004-.012-.044-.133A3 3 0 0 0 10.059 14H7.942Z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+                  
+            </div>
+             <!-- для профиля -->
+            <div class="h-full accordion-toggle justify-self-end place-self-center shadow  w-10 bg-gray-700 rounded-md transition duration-200 ease-in-out active:bg-gray-500">
+                <svg class="w-10 h-10 transition-all justify-self-center place-self-center text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
+                </svg>
+                  
+            </div>
+        </div>
+        <div id="cord" class=" z-10 accordion-content overflow-hidden transition-all duration-200 sticky backdrop-blur-md bg-gray-800 max-h-0 bg">
+            <!-- <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-[#c4ab873b]"><a href="/profile" class="w-full h-full">Профиль</a></h1> -->
+            <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-gray-700"><a href="/test" class="w-full h-full">Упражнения</a></h1>
+            <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-gray-700"><a href="/leaderboard" class="w-full h-full">Таблица лидеров</a></h1>
+            <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-gray-700"><a href="Calculator.html" class="w-full h-full">О проекте</a></h1>
+            
+            
+        </div>
+        
+    </header>
+
+    
+    <main class="flex flex-col items-center justify-center py-16">
+        <h2 class="sm:text-3xl font-semibold mb-8  text-2xl">Упражнения на развитие памяти</h2>
+        <!-- <p class="text-gray-400 text-center mb-8">Join us and challenge your brain with a variety of memory games designed to enhance your cognitive skills.</p> -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl px-4">
+            <!-- <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-2">Memory Match</h3>
+                <p class="text-gray-400 mb-4">Test your memory by matching pairs of cards in the shortest time possible.</p>
+                <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-lg w-full text-center">Play Now</a>
+            </div> -->
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-2">Примеры с подстановкой</h3>
+                <p class="text-gray-400 mb-4 ">Улучшай свою память с помощью решения примеров с подстановкой  </p>
+                <a href="/primeri" class="bg-blue-500 text-white font-bold p-2 rounded-lg text-center place-self-center transition delay-50 duration-300 ease-in-out hover:bg-blue-600 ">Решить</a>
+            </div>
+            <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-2">Запоминание слов</h3>
+                <p class="text-gray-400 mb-4">Улучши свой словарный запас и улучши свою память с помощью запоминания слов</p>
+                <a href="/words" class="bg-blue-500 text-white font-bold p-2 rounded-lg w-full text-center transition duration-300 delay-50 ease-in-out hover:bg-blue-600">Решить</a>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.querySelectorAll('.accordion-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const isOpen = button.classList.contains('active');
+                const content = document.getElementById("cord");
+                console.log("asd")
+                // Закрыть все аккордеоны
+                document.querySelectorAll('.accordion-toggle').forEach(otherButton => {
+                    if (otherButton !== button) {
+                        otherButton.classList.remove('active');
+                        otherButton.querySelector('svg').classList.remove('rotate-180');
+                        otherButton.nextElementSibling.style.maxHeight = '0';
+                    }
+                });
+
+                // Переключить текущий аккордеон
+                if (!isOpen) {
+                    button.classList.add('active');
+                    button.querySelector('svg').classList.add('rotate-90');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                
+                } else {
+                    button.classList.remove('active');
+                    button.querySelector('svg').classList.remove('rotate-90');
+                    content.style.maxHeight = '0';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

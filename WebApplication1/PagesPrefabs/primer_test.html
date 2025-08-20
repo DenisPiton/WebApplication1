@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Exercise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="bg-gray-800 p-6 hidden sm:block">
+        <h1 class="text-3xl font-bold text-center">Упражнение для памяти</h1>
+        <nav class="mt-4 flex justify-center space-x-4">
+            <a href="/profile" class="text-gray-300 hover:text-blue-400">Профиль</a>
+            <a href="/test" class="text-gray-300 hover:text-blue-400">Упражнения</a>
+            <a href="/leaderboard" class="text-gray-300 hover:text-blue-400">Таблица лидеров</a>
+            <a href="/about" class="text-gray-300 hover:text-blue-400">О проекте</a>
+        </nav>
+    </header>
+    
+    <header class="p-4 z-100 mb-6 w-full h-15 place-self-center sticky  top-0 right-0 left-0 rounded-lg justify-items-stretch display sm:hidden ">
+        <div class="  backdrop-blur-md grid grid-cols-2 w-full h-15 p-2 bg-gray-800">
+            <div>
+                <a href="/profile">
+                    <svg class="w-10 h-10  text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-8-5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm1.942 4a3 3 0 0 0-2.847 2.051l-.044.133-.004.012c-.042.126-.055.167-.042.195.006.013.02.023.038.039.032.025.08.064.146.155A1 1 0 0 0 6 17h6a1 1 0 0 0 .811-.415.713.713 0 0 1 .146-.155c.019-.016.031-.026.038-.04.014-.027 0-.068-.042-.194l-.004-.012-.044-.133A3 3 0 0 0 10.059 14H7.942Z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+                  
+            </div>
+             <!-- для профиля -->
+            <div class="h-full accordion-toggle justify-self-end place-self-center shadow  w-10 bg-gray-700 rounded-md transition duration-200 ease-in-out active:bg-gray-500">
+                <svg class="w-10 h-10 transition-all justify-self-center place-self-center text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
+                </svg>
+                  
+            </div>
+        </div>
+        <div id="cord" class=" z-10 accordion-content overflow-hidden transition-all duration-200 sticky backdrop-blur-md bg-gray-800 max-h-0 bg">
+            <!-- <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-[#c4ab873b]"><a href="/profile" class="w-full h-full">Профиль</a></h1> -->
+            <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-gray-700"><a href="/test" class="w-full h-full">Упражнения</a></h1>
+            <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-gray-700"><a href="/leaderboard" class="w-full h-full">Таблица лидеров</a></h1>
+            <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-gray-700"><a href="Calculator.html" class="w-full h-full">О проекте</a></h1>
+            
+            
+        </div>
+        
+    </header>
+    <h1 class="place-self-center m-8 font-bold text-xl text-center">Запоминание математических символов</h1>
+    <h1 id="t" class="place-self-center text-white-800">Нажатие кнопки запустит тест</h1>
+    <div  class="place-self-center content-center h-auto">
+        <button  id="but" class="place-self-center w-48 h-24 mt-16 bg-blue-500 rounded-lg text-3xl font-bold">Старт!</button>
+        <div id="ref" class=" grid grid-cols-4 grid-rows-2  content-center bg-gray-700 rounded-lg w-96 h-32 text-center text-2xl hidden">
+            <div class="self-center text-center">+</div>
+            <div class="self-center text-center">-</div>
+            <div class="self-center text-center">*</div>
+            <div class="self-center text-center">/</div>
+        </div>
+        <div id="timer" class="place-self-center w-32 h-32 bg-gray-600 rounded-lg text-4xl text-center content-center m-8 hidden">
+            <h1 id="timerr" class="text-6xl">60</h1>
+        </div>
+        <!-- hidden -->
+        <div id="gen-grid" class="hidden sm:grid-cols-2 sm:grid-rows-5 bg-gray-800 sm:h-96 w-auto gap-10 rounded-lg p-5 m-7 content-center ">
+            <div class=" h-16 text-center flex justify-stretch">
+                <span class="self-center text-2xl"></span>
+                <input class="self-center h-10 outline-none bg-gray-600 rounded-lg text-2xl w-14 text-center">
+
+            </div>
+            <div class=" h-16 text-center flex gap-1">
+                <span class="self-center text-2xl"></span>
+                <input class="self-center h-10 outline-none bg-gray-600 rounded-lg text-2xl w-14 text-center">
+                <div class="w-14"></div>
+            </div>
+            <div class=" h-16 text-center flex gap-1">
+                <span class="self-center text-2xl"></span>
+                <input class="self-center h-10 outline-none bg-gray-600 rounded-lg text-2xl w-14 text-center">
+                <div class="w-14"></div>
+            </div>
+            <div class=" h-16 text-center flex gap-1">
+                <span class="self-center text-2xl"></span>
+                <input class="self-center h-10 outline-none bg-gray-600 rounded-lg text-2xl w-14 text-center">
+                <div class="w-14"></div>
+            </div>
+            <div class=" h-16 text-center flex gap-1">
+                <span class="self-center text-2xl"></span>
+                <input class="self-center h-10 outline-none bg-gray-600 rounded-lg text-2xl w-14 text-center">
+                <div class="w-14"></div>
+            </div>
+            <div class=" h-16 text-center flex gap-1">
+                <span class="self-center text-2xl"></span>
+                <input class="self-center h-10 outline-none bg-gray-600 rounded-lg text-2xl w-14 text-center">
+                <div class="w-14"></div>
+            </div>
+            <div class=" h-16 text-center flex gap-1">
+                <span class="self-center text-2xl"></span>
+                <input class="self-center h-10 outline-none bg-gray-600 rounded-lg text-2xl w-14 text-center">
+                <div class="w-14"></div>
+            </div>
+            <div class=" h-16 text-center flex gap-1">
+                <span class="self-center text-2xl"></span>
+                <input class="self-center h-10 outline-none bg-gray-600 rounded-lg text-2xl w-14 text-center">
+                <div class="w-14"></div>
+            </div>
+            <div class=" h-16 text-center flex gap-1">
+                <span class="self-center text-2xl"></span>
+                <input class="self-center h-10 outline-none bg-gray-600 rounded-lg text-2xl w-14 text-center">
+                <div class="w-14"></div>
+            </div>
+            <div class=" h-16 text-center flex gap-1">
+                <span class="self-center text-2xl"></span>
+                <input class="self-center h-10 outline-none bg-gray-600 rounded-lg text-2xl w-14 text-center">
+                <div class="w-14"></div>
+            </div>
+
+
+
+        </div>
+        <div id="result-desk" class="place-self-center w-96 h-80 bg-gray-800 mt-10 text-center p-6 rounded-3xl hidden">
+            <p class="text-3xl font-semibold">Вы решили:</p>
+            <p id="res-score" class="text-6xl font-semibold my-4">10 из 10</p>
+            <p id="res-time" class="font-light text-3xl mb-7">за 100 секунд</p>
+            <a href="/test" class=" rounded-lg bg-blue-500 text-2xl font-bold p-2">На главную</a>
+            <p class="font-light text-sm mt-5 text-gray-400">*все результаты можно посмотреть в профиле</p>
+        </div>
+        
+
+    </div>
+    <div id="submit" class="place-self-center w-24 h-10 bg-blue-500 rounded-lg text-xl font-bold text-center content-center hover:bg-blue-800 cursor-pointer hidden">Submit</div>
+    <div id="timer_g" class="bg-gray-700 place-self-end h-10 w-24 text-xl text-center content-center rounded-lg mt-10 hidden"></div>
+
+    
+
+
+    <script>
+        document.querySelectorAll('.accordion-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const isOpen = button.classList.contains('active');
+                const content = document.getElementById("cord");
+                console.log("asd")
+                // Закрыть все аккордеоны
+                document.querySelectorAll('.accordion-toggle').forEach(otherButton => {
+                    if (otherButton !== button) {
+                        otherButton.classList.remove('active');
+                        otherButton.querySelector('svg').classList.remove('rotate-180');
+                        otherButton.nextElementSibling.style.maxHeight = '0';
+                    }
+                });
+
+                // Переключить текущий аккордеон
+                if (!isOpen) {
+                    button.classList.add('active');
+                    button.querySelector('svg').classList.add('rotate-90');
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                
+                } else {
+                    button.classList.remove('active');
+                    button.querySelector('svg').classList.remove('rotate-90');
+                    content.style.maxHeight = '0';
+                }
+            });
+        });
+    </script>
+    
+    <script>
+        let t = document.getElementById("t")
+        let field = document.getElementById("gr")
+        let but = document.getElementById("but")
+        but.addEventListener("click",click)
+        let result_desk = document.getElementById("result-desk")
+        let tim = 60
+        let tim_score = 0
+        let score = 0
+        
+
+
+
+        let ans = Array();
+
+        let generation =  function()
+        {
+            document.getElementById("timer_g").classList.remove("hidden")
+            gr = document.getElementById("gen-grid");
+            gr.classList.remove("hidden")
+            gr.classList.add("grid")
+            cells = gr.children;
+            but = document.getElementById("submit");
+            but.classList.remove("hidden")
+
+
+            for(let i = 0;i<10;i++)
+            {
+                console.log(getRandomInt(4))
+                switch(getRandomInt(4))
+                {
+                    case 0:
+                        let x = getRandomInt(30);
+                        let y = getRandomInt(30);
+                        cells[i].children[0].textContent = (x.toString() +" "+ arr[0].toString() +" "+ y.toString() + " =")
+                        ans.push(x+y)
+                        break;
+                    case 1:
+                        let x1 = getRandomInt(30);
+                        let y1 = getRandomInt(30);
+                        cells[i].children[0].textContent = (x1.toString() +" "+ arr[1].toString() +" "+ y1.toString() + " =")
+                        ans.push(x1-y1)
+                        break;
+                    case 2:
+                        let x2 = getRandomInt(10);
+                        let y2 = getRandomInt(10);
+                        cells[i].children[0].textContent = (x2.toString() +" "+ arr[2].toString() +" "+ y2.toString() + " =")
+                        ans.push(x2*y2)
+                        break;
+                    case 3:
+                        let x3 = getRandomInt(10);
+                        let y3 = getRandomInt(10);
+                        cells[i].children[0].textContent = ((x3*y3).toString()+" "+ arr[3].toString() +" "+ y3.toString() + " =")
+                        ans.push(x3)
+                        break;    
+                }
+            }
+            but.addEventListener("click",(event)=>{
+                for(let j = 0;j<ans.length;j++)
+                {
+                    console.log(ans[j])
+                    if(cells[j].children[1].value == ans[j].toString())
+                    {
+                        score++;
+                        
+                    }
+                }
+
+
+
+                console.log(document.cookie)
+                let csrftoken = "";
+                for(let i = document.cookie.toString().indexOf("csrftoken=")+10;i<document.cookie.length;i++)
+                {
+                    if(document.cookie[i] != ";")
+                    {
+                        csrftoken+=document.cookie[i];
+                        
+                    }
+                    else
+                    {
+                        
+                        break;
+                    }
+                }
+                console.log(csrftoken)
+                fetch("/primeri",{
+                    method:"POST",
+                    headers:
+                    {
+                        'Content-Type':'application/json',
+                        'X-CSRFToken':csrftoken
+                    },
+                    body:JSON.stringify(
+                    {
+                        'score':score,
+                        'time':tim_score
+                    })
+                }).then((result)=>{
+                    gr.classList.add("hidden")
+                    gr.classList.remove("grid")
+                    document.getElementById("timer_g").className += " hidden"
+                    but.className += " hidden"
+                    result_desk.className = "place-self-center w-96 h-80 bg-gray-800 text-center p-6 rounded-3xl"
+                    let res_score = document.getElementById("res-score")
+                    let res_time = document.getElementById("res-time")
+                    res_score.textContent = score.toString()+" из 10"
+                    res_time.textContent = "за "+tim_score.toString()+" секунд"
+                })
+            });
+            setInterval(()=>{
+                tim_score++;
+                document.getElementById("timer_g").textContent = tim_score.toString();
+            },1000);
+            
+        }
+
+        
+
+
+
+        function getRandomInt(max) {
+            return Math.floor(Math.random() * max);
+        }
+        function shuffle(array)
+        {
+            let newArray = array
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        let arr = Array();
+
+
+        function click(event)
+        {
+            
+            t.hidden = true;
+            but.hidden = true;
+            let str = ref.className.toString()
+
+            ref.className = str.slice(0,-6);
+            timer.classList.remove("hidden")
+            
+            
+
+            // let grid = document.createElement("div");
+            // grid.className = "grid grid-cols-4 grid-rows-2  content-center bg-gray-700 rounded-lg w-96 h-32 text-center text-2xl";
+            // grid.id="ref";
+            // let span1 = document.createElement("div");
+            // span1.className = "self-center text-center "
+            // span1.textContent = "+";
+            // grid.appendChild(span1);
+            // let span2 = document.createElement("div");
+            // span2.className = "self-center text-center"
+            // span2.textContent = "-";
+            // grid.appendChild(span2);
+            // let span3 = document.createElement("div");
+            // span3.className = "self-center text-center"
+            // span3.textContent = "*";
+            // grid.appendChild(span3);
+            // let span4 = document.createElement("div");
+            // span4.className = "self-center text-center"
+            // span4.textContent = "/";
+            // grid.appendChild(span4);
+
+            grid = document.getElementById("ref");
+
+            for(let i = 11020;i<11090;i++)
+            {
+                arr.push(String.fromCharCode(i));
+            }
+            alert(arr[0]);
+            arr = shuffle(arr);
+
+            
+
+            let span5 = document.createElement("div");
+            span5.className = "self-center text-center"
+            span5.textContent = arr[0]
+            grid.appendChild(span5);
+            let span6 = document.createElement("div");
+            span6.className = "self-center text-center"
+            span6.textContent = arr[1];
+            grid.appendChild(span6);
+            let span7 = document.createElement("div");
+            span7.className = "self-center text-center"
+            span7.textContent = arr[2];
+            grid.appendChild(span7);
+            let span8 = document.createElement("div");
+            span8.className = "self-center text-center"
+            span8.textContent = arr[3];
+            grid.appendChild(span8);
+            
+
+
+            but.parentElement.appendChild(grid);
+            setInterval(()=>{
+                tim-=1;
+                document.getElementById("timerr").textContent = tim.toString();
+                if(tim == 0)
+                {
+                    timer.className += " hidden";
+                    grid.className += " hidden";
+                    generation();
+
+
+                    clearInterval();
+                }
+            },1000)
+
+            
+
+        }
+        
+    </script>
+</body>
+</html>

@@ -3,5 +3,26 @@
 	
 }
 
+<partial name="~/Views/Shared/_Header.cshtml"></partial>
 
-<h1>sdfghjk</h1>
+<main class="flex flex-col items-center justify-center py-16">
+    <h2 class="sm:text-3xl font-semibold mb-8  text-2xl">Упражнения на развитие памяти</h2>
+    <!-- <p class="text-gray-400 text-center mb-8">Join us and challenge your brain with a variety of memory games designed to enhance your cognitive skills.</p> -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl px-4">
+        <!-- <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+            <h3 class="text-xl font-semibold mb-2">Memory Match</h3>
+            <p class="text-gray-400 mb-4">Test your memory by matching pairs of cards in the shortest time possible.</p>
+            <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-lg w-full text-center">Play Now</a>
+        </div> -->
+        <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+            <h3 class="text-xl font-semibold mb-2">Примеры с подстановкой</h3>
+            <p class="text-gray-400 mb-4 ">Улучшай свою память с помощью решения примеров с подстановкой  </p>
+            <a href="/primeri" class="bg-blue-500 text-white font-bold p-2 rounded-lg text-center place-self-center transition delay-50 duration-300 ease-in-out hover:bg-blue-600 ">Решить</a>
+        </div>
+        <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+            <h3 class="text-xl font-semibold mb-2">Запоминание слов</h3>
+            <p class="text-gray-400 mb-4">Улучши свой словарный запас и улучши свою память с помощью запоминания слов</p>
+            <a href="/words" class="bg-blue-500 text-white font-bold p-2 rounded-lg w-full text-center transition duration-300 delay-50 ease-in-out hover:bg-blue-600">Решить</a>
+        </div>
+    </div>
+</main>

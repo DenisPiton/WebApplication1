@@ -5,12 +5,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.7"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.7"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.7"/>
+    <Content Remove="wwwroot\package-lock.json" />
+    <Content Remove="wwwroot\package.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Shared\"/>
-    <Folder Include="wwwroot\"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.7" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
 </Project>

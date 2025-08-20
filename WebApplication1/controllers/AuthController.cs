@@ -49,7 +49,7 @@ namespace WebApplication1.controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Reg(UserRegistrationDTO dto)
+        public IActionResult Reg([FromForm]UserRegistrationDTO dto)
         {
             if (ModelState.IsValid)
             {
@@ -66,6 +66,7 @@ namespace WebApplication1.controllers
                 return View(dto);
             }
         }
+        
         
 
 

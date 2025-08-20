@@ -18,6 +18,14 @@ namespace WebApplication1.controllers
         {
             return View();
         }
+
+        [AuthFilter]
+
+        public IActionResult Expr()
+        {
+            return View();
+        }
+
         
 
     }

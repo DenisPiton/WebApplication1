@@ -20,6 +20,7 @@ namespace WebApplication1.Services.Implementations
         public void CreateResult(Result result)
         {
             _dbContext.Results.Add(result);
+            _dbContext.SaveChanges();
 
         }
 
