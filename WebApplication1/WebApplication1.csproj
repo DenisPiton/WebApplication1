@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Content Remove="controllers\words.json" />
     <Content Remove="wwwroot\package-lock.json" />
     <Content Remove="wwwroot\package.json" />
   </ItemGroup>
@@ -17,6 +18,7 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="words.json" />
     <None Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
 </Project>

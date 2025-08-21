@@ -10,6 +10,7 @@ namespace WebApplication1.Services
         IList<User> GetUsersWhere(System.Linq.Expressions.Expression<Func<User, bool>> expression);
 
         User? GetUserById(int id);
+        User? GetUserById(int? id);
         User? GetUserByEmail(string email);
         User? GetUserByLogin(string login);
 

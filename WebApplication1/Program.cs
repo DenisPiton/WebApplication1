@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Hosting.Builder;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.Filters;
@@ -30,7 +31,7 @@ namespace WebApplication1
             });
 
             builder.Services.AddScoped<IUserUtils, UserUtils>();
-
+            builder.Services.AddScoped<IResultUtils, ResultUtils>();
 
 
             var app = builder.Build();

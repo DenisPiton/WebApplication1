@@ -30,6 +30,7 @@ namespace WebApplication1.Services.Implementations
 
         public User? GetUserById(int id)
         {
+           
             return appllContext.Users.Find(id);
         }
 
@@ -64,6 +65,18 @@ namespace WebApplication1.Services.Implementations
         public bool AnyUserByLogin(string username)
         {
             return appllContext.Users.Any(a => a.userame == username);
+        }
+
+        public User? GetUserById(int? id)
+        {
+            if(id!= null)
+            {
+               return GetUserById(id??-1);
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

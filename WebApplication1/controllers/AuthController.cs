@@ -24,17 +24,20 @@ namespace WebApplication1.controllers
         {
             if (ModelState.IsValid)
             {
-                User? user = utils.GetUserByEmail(DTO.email_or);
-                if (user.password == DTO.password)
-                {
-                    ISession ses = HttpContext.Session;
-                    ses.SetInt32("User_id", user.id);
-                    return RedirectToAction("Main", "Tests");
-                }
-                else
-                {
-                    return View(DTO);
-                }
+                ISession ses = HttpContext.Session;
+
+                ses.SetInt32("User_id", utils.GetUserByEmail(DTO.email_or).id);
+                return RedirectToAction("Main", "Tests");
+                //User? user = utils.GetUserByEmail(DTO.email_or);
+                //if (user.password == DTO.password)
+                //{
+
+                    
+                //}
+                //else
+                //{
+                //    return View(DTO);
+                //}
                 
             }
             else

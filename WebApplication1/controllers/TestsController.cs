@@ -25,7 +25,10 @@ namespace WebApplication1.controllers
         {
             return View();
         }
-
+        public IActionResult Words()
+        {
+            return View();
+        }
         
 
     }

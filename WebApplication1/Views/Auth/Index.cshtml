@@ -6,8 +6,9 @@
 @using WebApplication1.Models.DTO
 @using WebApplication1.Services;
 @using WebApplication1.Data.Entites;
+<partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml"></partial>
 
-@model UserDTO;
+@model WebApplication1.Models.DTO.UserDTO;
 
 <div class="bg-gray-900 flex items-center justify-center min-h-screen">
     <div class="bg-gray-800 p-8 rounded-lg shadow-lg w-96">
@@ -18,6 +19,7 @@
             <div class="mb-4">
                 <label class="block text-gray-300 mb-2" for="email">Войти</label>
                 <input class="inp" type="email"  placeholder="Введите свою электронную почту" asp-for="email_or">
+                <span asp-validation-for="UserDTO"></span>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-300 mb-2"  name="password">Пароль</label>
