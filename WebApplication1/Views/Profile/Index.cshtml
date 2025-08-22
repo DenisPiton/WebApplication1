@@ -6,7 +6,7 @@
 
 
 
-
+@* 
 
 <h1 class="text-4xl place-self-center mt-8">Привет @ViewBag.user, вот твоя статистика:</h1>
 <div class="grid grid-cols-2 auto-rows-auto gap-5 place-items-center mt-8">
@@ -18,7 +18,22 @@
 </div>
 <h1 class="text-xl text-gray-400 place-self-center mt-8">время решения примеров с максимальным результатом:</h1>
 <div id="myChart3" class="h-96 w-96 place-self-center m-2"></div>
+ *@
+<h1 class="text-4xl place-self-center mt-8 text-center">Привет @ViewBag.user, вот твоя статистика:</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 auto-rows-auto gap-5 place-items-center mt-8">
+    <div>
+        <h1 class="text-xl text-gray-400">Результаты по запоминанию слов:</h1>
+        <div id="myChart" class="h-96 w-96"></div>
+    </div>
+    <div>
+        <h1 class="text-xl text-gray-400">Колличество решёных примеров:</h1>
+        <div id="myChart2" class="h-96 w-96"></div>
+    </div>
 
+
+</div>
+<h1 class="text-xl text-gray-400 place-self-center mt-8 text-center">время решения примеров с максимальным результатом:</h1>
+<div id="myChart3" class="h-96 w-96 place-self-center m-2"></div>
 
 
 

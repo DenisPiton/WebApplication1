@@ -35,11 +35,11 @@ namespace WebApplication1.controllers
         [HttpPost]
         public JsonResult CreateResult([FromBody]ResultDTO dto)
         {
-            Console.WriteLine("asljdg;askgd;kgals \n asdiahjskldhiaskldi \n asdkgasjdhfgalsjd\n asdhaskdhalkjsd \n");
-            Console.WriteLine(HttpContext.Session.GetString("User_id"));
-            Console.WriteLine(dto.score);
-            Console.WriteLine(dto.type);
-            Console.WriteLine(dto.time);
+            //Console.WriteLine("asljdg;askgd;kgals \n asdiahjskldhiaskldi \n asdkgasjdhfgalsjd\n asdhaskdhalkjsd \n");
+            //Console.WriteLine(HttpContext.Session.GetString("User_id"));
+            //Console.WriteLine(dto.score);
+            //Console.WriteLine(dto.type);
+            //Console.WriteLine(dto.time);
             if ((User?)HttpContext.Items["CurrentUser"] != null)
             {
                 Result result = new Result { user = (User)HttpContext.Items["CurrentUser"], score = dto.score, time = dto.time, type = dto.type };

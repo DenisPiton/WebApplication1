@@ -23,7 +23,15 @@ namespace WebApplication1.controllers
         }
         public IActionResult LeaderBoard()
         {
-            IList<Result> a = _resultUtils.Get100BestResults();
+            IEnumerable<Result> a = _resultUtils.Get100BestResults();
+            foreach(var i in a)
+            {
+                if(i.user == null)
+                {
+                    i.user = _userUtils.GetUserById(i.User_id);
+                }
+
+            }
             return View(a);
         }
         

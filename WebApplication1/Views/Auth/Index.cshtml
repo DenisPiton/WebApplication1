@@ -19,11 +19,12 @@
             <div class="mb-4">
                 <label class="block text-gray-300 mb-2" for="email">Войти</label>
                 <input class="inp" type="email"  placeholder="Введите свою электронную почту" asp-for="email_or">
-                <span asp-validation-for="UserDTO"></span>
+                <span asp-validation-for="email_or" class="text-red-500 text-size-xs font-[6px]"></span>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-300 mb-2"  name="password">Пароль</label>
                 <input class="inp" type="password" asp-for="password"placeholder="Введите пароль" required>
+                <span asp-validation-for="password" class="text-red-500 text-size-xs font-[6px]"></span>
             </div>
             <button class="butun" type="submit">Войти</button>
         </form>

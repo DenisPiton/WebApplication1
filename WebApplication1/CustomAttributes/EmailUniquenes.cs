@@ -20,7 +20,7 @@ namespace WebApplication1.CustomAttributes
                 }
                 else
                 {
-                    return new ValidationResult(ErrorMessage ?? "This email is already used");
+                    return new ValidationResult(ErrorMessage ?? "Этот адрес уже используется");
                 }
             }
             else if (string.IsNullOrEmpty(email))

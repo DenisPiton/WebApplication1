@@ -29,7 +29,7 @@ namespace WebApplication1.CustomAttributes
             }
             else
             {
-                return new ValidationResult(ErrorMessage = "SDFGHJK");
+                return new ValidationResult(ErrorMessage = "Пароль не содержит цифр и заглавных букв");
             }
 
         }
