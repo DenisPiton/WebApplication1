@@ -17,7 +17,17 @@ namespace WebApplication1
                 optins.Filters.Add<CurrentUser>();
             });
             builder.Services.AddSession();
-
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp",
+                    policy =>
+                    {
+                        policy.WithOrigins("http://localhost:5173", "http://localhost:5199")
+                              .AllowAnyHeader()
+                              .AllowAnyMethod()
+                              .AllowCredentials();
+                    });
+            });
             builder.Services.AddDbContext<AppllContext>(options =>
             {
                 string con = builder.Configuration.GetConnectionString("Default")?? "";
@@ -35,6 +45,7 @@ namespace WebApplication1
 
 
             var app = builder.Build();
+            app.UseCors("AllowReactApp");
             app.UseStaticFiles();
             app.UseSession();
             app.MapControllerRoute("default", "{controller=Auth}/{action=Index}");

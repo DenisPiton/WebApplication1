@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ваши кастомные стили ниже */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+.inp
+{
+    padding: 10px;
+    border-radius: 3px;
+    width: 100%;
+    background-color: #374151;
+    border:0px solid #000;
+    transition: border 0.2s;
+    color: white;
+}
+.inp:focus
+{
+    border: 2px solid #0077ff;
+    outline: none;
+}
+.butun
+{
+    padding: 10px;
+    border-radius: 3px;
+    width: 100%;
+    background-color: #0077ff;
+    transition: background-color 0.3s, border 0.1s;
+    color: white;
+
+}
+.butun:hover
+{
+    background-color: #005fcb;
+}
+.butun:focus
+{
+    border: 2px solid #0077ff;
+}

@@ -20,14 +20,15 @@ namespace WebApplication1.controllers
 
         }
         [HttpPost]
-        public IActionResult Index([FromForm] UserDTO DTO)
+        public IActionResult Index([FromBody] UserDTO DTO)
         {
+            Console.WriteLine(DTO.email_or);
             if (ModelState.IsValid)
             {
                 ISession ses = HttpContext.Session;
 
                 ses.SetInt32("User_id", utils.GetUserByEmail(DTO.email_or).id);
-                return RedirectToAction("Main", "Tests");
+                return Ok( new { user = ses.GetInt32("User_id") } );
                 //User? user = utils.GetUserByEmail(DTO.email_or);
                 //if (user.password == DTO.password)
                 //{
@@ -42,7 +43,8 @@ namespace WebApplication1.controllers
             }
             else
             {
-                return View(DTO);
+                
+                return BadRequest(new {Error = ModelState.ValidationState});
             }
 
         }
