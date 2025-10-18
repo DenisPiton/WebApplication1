@@ -8,7 +8,9 @@ class AuthService {
         })
 
         if(response.status === 200){
-            localStorage.setItem("user_id", JSON.stringify(response.data.user));
+            console.log(response.data.jwstoken);
+            localStorage.setItem("token", JSON.stringify(response.data.jwstoken));
+
         }
         return response.data;
     }

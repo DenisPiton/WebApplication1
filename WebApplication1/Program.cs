@@ -1,10 +1,15 @@
 
 using Microsoft.AspNetCore.Hosting.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.JsonWebTokens;
 using WebApplication1.Data;
 using WebApplication1.Filters;
 using WebApplication1.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 using WebApplication1.Services.Implementations;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 namespace WebApplication1
 {
     public class Program
@@ -17,6 +22,21 @@ namespace WebApplication1
                 optins.Filters.Add<CurrentUser>();
             });
             builder.Services.AddSession();
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]??"olololololololo"))
+
+                };
+            });
+               
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowReactApp",
@@ -45,7 +65,10 @@ namespace WebApplication1
 
 
             var app = builder.Build();
+
             app.UseCors("AllowReactApp");
+            app.UseAuthentication();
+            app.UseAuthorization();
             app.UseStaticFiles();
             app.UseSession();
             app.MapControllerRoute("default", "{controller=Auth}/{action=Index}");

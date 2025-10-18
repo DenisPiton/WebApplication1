@@ -1,17 +1,41 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using WebApplication1.Data.Entites;
 using WebApplication1.Models.DTO;
 using WebApplication1.Services;
-
+using WebApplication1.Auth;
 namespace WebApplication1.controllers
 {
-
+    
     public class AuthController : Controller
     {
         private readonly IUserUtils utils;
         public AuthController(IUserUtils utils) { this.utils = utils; }
+
+        private string GenerateJwtToken(User user)
+        {
+            var Auth = new AuthCont();
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.Name, user.userame),
+                new Claim(ClaimTypes.NameIdentifier, user.id.ToString()),
+            };
+            
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Auth.GetSecret()));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: Auth.GetIssuer(),
+                audience: Auth.GetAudience(),
+                claims: claims,
+                expires: DateTime.Now.AddHours(3),
+                signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
 
         [HttpGet]
         public ActionResult Index()
@@ -25,10 +49,9 @@ namespace WebApplication1.controllers
             Console.WriteLine(DTO.email_or);
             if (ModelState.IsValid)
             {
-                ISession ses = HttpContext.Session;
-
-                ses.SetInt32("User_id", utils.GetUserByEmail(DTO.email_or).id);
-                return Ok( new { user = ses.GetInt32("User_id") } );
+                var token = GenerateJwtToken(utils.GetUserByEmail(DTO.email_or));
+                Console.WriteLine(token);
+                return Ok( new {Jwstoken = token.ToString() });
                 //User? user = utils.GetUserByEmail(DTO.email_or);
                 //if (user.password == DTO.password)
                 //{
