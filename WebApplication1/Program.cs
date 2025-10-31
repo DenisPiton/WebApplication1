@@ -1,15 +1,15 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Hosting.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.JsonWebTokens;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Text;
 using WebApplication1.Data;
 using WebApplication1.Filters;
 using WebApplication1.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-
 using WebApplication1.Services.Implementations;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
 namespace WebApplication1
 {
     public class Program
@@ -36,13 +36,13 @@ namespace WebApplication1
 
                 };
             });
-               
+ 
             builder.Services.AddCors(options =>
             {
                 options.AddPolicy("AllowReactApp",
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:5173", "http://localhost:5199")
+                        policy.WithOrigins("http://localhost:5173", "http://localhost:5199", "http://localhost:3000", "http://reactapp:80")
                               .AllowAnyHeader()
                               .AllowAnyMethod()
                               .AllowCredentials();
@@ -50,7 +50,7 @@ namespace WebApplication1
             });
             builder.Services.AddDbContext<AppllContext>(options =>
             {
-                string con = builder.Configuration.GetConnectionString("Default")?? "";
+                string con = builder.Configuration.GetConnectionString(builder.Environment.IsProduction() ? "Default" : "Dev")?? "";
                 if (con == "")
                 {
                     throw new Exception("Problem with Connecting DB");
@@ -65,6 +65,24 @@ namespace WebApplication1
 
 
             var app = builder.Build();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<AppllContext>();
+                    context.Database.Migrate(); // Применяет pending миграции
+                                                // Или создает базу, если её нет:
+                                                // context.Database.EnsureCreated();
+                }
+                catch (Exception ex)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogError(ex, "An error occurred while migrating the database.");
+                }
+            }
+
 
             app.UseCors("AllowReactApp");
             app.UseAuthentication();

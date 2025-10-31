@@ -1,0 +1,20 @@
+# ReactFront/Dockerfile.debug
+FROM node:20-alpine AS build
+
+WORKDIR /app
+
+# Копируем зависимости
+COPY package.json package-lock.json ./
+
+# Устанавливаем зависимости
+RUN npm ci --silent
+
+# Копируем исходный код
+COPY . .
+
+# Отладочные команды
+RUN ls -la /app/src/
+RUN find /app/src -name "*.jsx" -o -name "*.js"
+
+# Пробуем собрать
+RUN npm run build

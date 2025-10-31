@@ -1,14 +1,18 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import "./Login.css"
-import AuthService from "../AuthService";
+
+import { useAuth } from "../AuthMech/AuthContext";
+
 const API_ADDRESS = "http://localhost:5199/"
 
 import api from '../api/api'
+import { useNavigate } from "react-router";
 
 
 function Login(){
-
+    const {login,loading,error} = useAuth();
+    const navigate =useNavigate();
     const [passBuf,setPass] = useState("");
     const [emailBuf,setEmail] = useState("");
     const handle_login = async ()=>{
@@ -34,8 +38,15 @@ function Login(){
             
         // }).then(a=>{console.log(a)})
         // console.log(response.data.token)
-        AuthService.login(emailBuf,passBuf);
-
+        
+        const response = await login(emailBuf,passBuf)
+        console.log(response);
+        if(response.success==true){
+            navigate("/Test")
+        }
+        else{
+            console.log(error);
+        }
 
     }
     return(<>
@@ -48,20 +59,20 @@ function Login(){
                 <div className="mb-4">
                     <label className="block text-gray-300 mb-2" name="email">Войти</label>
                     <input className="inp" type="email"  placeholder="Введите свою электронную почту" value={emailBuf} onChange={e => {setEmail(e.target.value)}}/>
-                    {/* <span asp-validation-name="email_or" className="text-red-500 text-size-xs font-[6px]"></span> */}
+                    <span asp-validation-name="email_or" className={error != ""? "text-red-500 text-size-xs font-[6px]":"text-red-500 text-size-xs font-[6px] hidden"}></span>
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-300 mb-2"  name="password">Пароль</label>
                     <input className="inp" type="password" placeholder="Введите пароль" value={passBuf} onChange={e=>{setPass(e.target.value)}} required/>
                     {/* <span asp-validation-name="password" className="text-red-500 text-size-xs font-[6px]"></span> */}
                 </div>
-                <button className="butun" onClick={handle_login}>Войти</button>
-            
+                <button disabled={loading} className="butun" onClick={handle_login}>{loading? "Вход...": "Войти"}</button>
+
                 <div className="mt-4 text-center">
                     <a className="text-blue-400 hover:underline" href="#">Забыли Пароль?</a>
                 </div>
                 <div className="mt-4 text-center">
-                    <p className="text-gray-400">Нет Аккаунта?</p><a className="text-blue-400 hover:underline" asp-action="Reg">Зарегистрироваться</a>
+                    <p className="text-gray-400">Нет Аккаунта?</p><a className="text-blue-400 hover:underline" href="/Registration">Зарегистрироваться</a>
                 </div>
             </div>
         </div>

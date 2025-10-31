@@ -37,21 +37,22 @@ namespace WebApplication1.controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        [HttpGet]
-        public ActionResult Index()
-        {
-            return View();
+        //[HttpGet]
+        //public ActionResult Index()
+        //{
+        //    return View();
 
-        }
+        //}
         [HttpPost]
         public IActionResult Index([FromBody] UserDTO DTO)
         {
             Console.WriteLine(DTO.email_or);
             if (ModelState.IsValid)
             {
-                var token = GenerateJwtToken(utils.GetUserByEmail(DTO.email_or));
+                User user = utils.GetUserByEmail(DTO.email_or);
+                var token = GenerateJwtToken(user);
                 Console.WriteLine(token);
-                return Ok( new {Jwstoken = token.ToString() });
+                return Ok( new {username = user.userame,jwstoken = token.ToString() });
                 //User? user = utils.GetUserByEmail(DTO.email_or);
                 //if (user.password == DTO.password)
                 //{
@@ -71,27 +72,28 @@ namespace WebApplication1.controllers
             }
 
         }
-        [HttpGet]
-        public IActionResult Reg()
-        {
-            return View();
-        }
+        //[HttpGet]
+        //public IActionResult Reg()
+        //{
+        //    return View();
+        //}
         [HttpPost]
-        public IActionResult Reg([FromForm]UserRegistrationDTO dto)
+        public IActionResult Reg([FromBody]UserRegistrationDTO dto)
         {
             if (ModelState.IsValid)
             {
                 User user = utils.CreateUser(dto.username, dto.password, dto.email);
-                ISession ses = HttpContext.Session;
-                ses.SetInt32("User_id", user.id);
+                var token = GenerateJwtToken(user);
+                Console.WriteLine(token);
+                return Ok(new { username = user.userame, jwstoken = token.ToString() });
 
-                return RedirectToAction("Main", "Tests");
+
 
 
             }
             else
             {
-                return View(dto);
+                return BadRequest();
             }
         }
         

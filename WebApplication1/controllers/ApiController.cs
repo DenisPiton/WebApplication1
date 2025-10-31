@@ -7,11 +7,19 @@ using WebApplication1.Services;
 using System.IO;
 
 using System.Runtime.InteropServices.Marshalling;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using System.Globalization;
+using Microsoft.AspNetCore.Identity;
 
 
 
 namespace WebApplication1.controllers
 {
+    public class LeaderboardBuf {
+        public string username {  get; set; }
+        public int result { get; set; }
+    }
     public class buf
     {
         public List<string> words { get; set; }
@@ -21,39 +29,59 @@ namespace WebApplication1.controllers
         public List<Result> slova { get; set; }
         public List<Result> primer { get; set; }
     }
+    [Authorize]
     public class ApiController : Controller
     {
         private readonly IResultUtils _resultUtils;
-        public ApiController(IResultUtils resultUtils) { this._resultUtils = resultUtils; }
+        private readonly IUserUtils _userUtils;
+        public ApiController(IResultUtils resultUtils,IUserUtils userUtils)  { this._resultUtils = resultUtils; this._userUtils = userUtils; }
         public IActionResult results()
         {
             return View();
         }
 
 
-        [AuthFilter]
         [HttpPost]
-        public JsonResult CreateResult([FromBody]ResultDTO dto)
+        public IActionResult CreateResult([FromBody]ResultDTO dto)
         {
-            //Console.WriteLine("asljdg;askgd;kgals \n asdiahjskldhiaskldi \n asdkgasjdhfgalsjd\n asdhaskdhalkjsd \n");
+            Console.WriteLine("asljdg;askgd;kgals \n asdiahjskldhiaskldi \n asdkgasjdhfgalsjd\n asdhaskdhalkjsd \n");
             //Console.WriteLine(HttpContext.Session.GetString("User_id"));
             //Console.WriteLine(dto.score);
             //Console.WriteLine(dto.type);
             //Console.WriteLine(dto.time);
-            if ((User?)HttpContext.Items["CurrentUser"] != null)
+
+            if (User.FindFirst(ClaimTypes.NameIdentifier)?.Value != null)
             {
-                Result result = new Result { user = (User)HttpContext.Items["CurrentUser"], score = dto.score, time = dto.time, type = dto.type };
+                User user = (User)_userUtils.GetUserById(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value));
+                
+
+
+                Result result = new Result { user = user, score = dto.score, time = dto.time, type = dto.type };
                 _resultUtils.CreateResult(result);
-                return Json(new { result = dto.score });
+                return Ok(new { result = dto.score });
             }
             else
             {
-                return Json(new { error = "Some Error has occurred" });
+                return BadRequest(new { error = "Some Error has occurred" });
             }
      
         }
+        [HttpGet]
+        public IActionResult GetUsersForLeaderboard() {
+            IList<User> users = _userUtils.GetAllUsers();
+            List<LeaderboardBuf> bufs = new List<LeaderboardBuf>();
+            foreach (var item in users)
+            {
+                bufs.Add(new LeaderboardBuf { username = item.userame, result = item.best_time });
+            }
 
-        [AuthFilter]
+
+            return Ok(users);
+        }
+
+
+
+        [HttpGet]
         public JsonResult Get24Words()
         {
             string connectionstring = "words.json";
@@ -66,12 +94,12 @@ namespace WebApplication1.controllers
             return Json(new { words = a.words });
         }
 
-
-        [AuthFilter]
-        public JsonResult GetResults()
+        
+        public IActionResult GetResults()
         {
-            User? user = (User?)HttpContext.Items["CurrentUser"];
-            if(user != null)
+            User? user = (User)_userUtils.GetUserById(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value));
+            Console.WriteLine(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            if (user != null)
             {
                 IList<Result> results = _resultUtils.GetResults(user);
                 return Json(new { slova = results.Where(a => a.type == "words").ToList(), primer = results.Where(a=>a.type == "solvings")});
