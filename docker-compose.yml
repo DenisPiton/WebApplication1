@@ -55,3 +55,5 @@ volumes:
 networks:
   app-network:
     driver: bridge
+
+#docker-compose up -d --build
