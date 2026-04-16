@@ -42,7 +42,7 @@ namespace WebApplication1
                 options.AddPolicy("AllowReactApp",
                     policy =>
                     {
-                        policy.AllowAnyOrigin()
+                        policy.WithOrigins("http://localhost:3000", "https://vercel.app")
                               .AllowAnyHeader()
                               .AllowAnyMethod()
                               .AllowCredentials();
@@ -56,7 +56,7 @@ namespace WebApplication1
                     throw new Exception("Problem with Connecting DB");
                     
                 }
-                options.UseSqlServer(con);
+                options.UseNpgsql(con);
 
             });
 
