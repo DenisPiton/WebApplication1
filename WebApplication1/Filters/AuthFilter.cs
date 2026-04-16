@@ -9,12 +9,13 @@ namespace WebApplication1.Filters
         {
             ISession ses = context.HttpContext.Session;
             int? id = ses.GetInt32("User_id");
+            Console.WriteLine("USER ID: " + id);
             if (id == null)
             {
                 context.Result = new UnauthorizedResult();
             }
             return;
-        }
+        } 
         
 
                 

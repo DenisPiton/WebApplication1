@@ -15,7 +15,7 @@ namespace WebApplication1.Filters
         {
             
         }
-
+        
         public void OnActionExecuting(ActionExecutingContext context)
         {
             ISession ses = context.HttpContext.Session;

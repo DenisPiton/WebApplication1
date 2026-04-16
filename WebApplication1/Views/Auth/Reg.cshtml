@@ -6,22 +6,22 @@
 @model UserRegistrationDTO;
 <div class="min-h-screen grid items-center bg-gray-900">
     <div class="bg-gray-800 w-96 rounded-lg p-7 place-self-center">
-        <h1 class="text-white text-2xl mb-6 text-center">Register a new account</h1>
+        <h1 class="text-white text-2xl mb-6 text-center">Регистрация</h1>
         <form method="post" asp-action="Reg" asp-controller="Auth">
             
             <div class="mb-6">
-                <label class="text-gray-200 block mb-2">Email</label>
+                <label class="text-gray-200 block mb-2">Почта</label>
                 <input asp-for="email" class="transition-all duration-200 bg-gray-700 p-2 outline-none rounded-md text-white  w-full h-10 focus:border-2 border-sky-500 " type="email" placeholder="example@somemail.com">
                 <span asp-validation-for="email" class="text-red-500 text-size-xs font-[6px]"></span>
             </div>
 
             <div class="mb-6">
-                <label class="text-gray-200 block mb-2">Login</label>
+                <label class="text-gray-200 block mb-2">Имя пользователя</label>
                 <input asp-for="username" class="transition-all duration-200 bg-gray-700 p-2 outline-none rounded-md text-white  w-full h-10 focus:border-2 border-sky-500 " type="text" placeholder="SomeName123" >
                 <span asp-validation-for="username" class="text-red-500 text-size-xs font-[6px]"></span>
             </div>
             <div class="mb-6">
-                <label class="text-gray-200 block mb-2">Password</label>
+                <label class="text-gray-200 block mb-2">Пароль</label>
                 <input asp-for="password" class="transition-all duration-200 bg-gray-700 p-2 outline-none rounded-md text-white  w-full h-10 focus:border-2 border-sky-500 " type="password" placeholder="Password" >
             </div>
             <div class="place-self-center">

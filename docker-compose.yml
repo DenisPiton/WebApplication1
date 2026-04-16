@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  # MS SQL Server
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: mssql_container
+    environment:
+      SA_PASSWORD: "SQLadmin123"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # ASP.NET Backend
+  webapi:
+    build:
+      context: ./WebApplication1
+      dockerfile: Dockerfile
+    container_name: aspnet_api
+    environment:
+      - ASPNETCORE_URLS=http://*:80
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ConnectionStrings__Default=Server=mssql,1433;Database=TestingSystem;User Id=SA;Password=SQLadmin123;TrustServerCertificate=True;
+    ports:
+      - "8080:80"
+    depends_on:
+      - mssql
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # React Frontend
+  reactapp:
+    build:
+      context: ./ReactFront
+      dockerfile: Dockerfile
+    container_name: react_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - webapi
+    networks:
+      - app-network
+    restart: unless-stopped
+
+volumes:
+  mssql_data:
+
+networks:
+  app-network:
+    driver: bridge
+
+#docker-compose up -d --build

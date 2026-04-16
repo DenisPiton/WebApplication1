@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Exercise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="bg-gray-800 p-6 hidden sm:block">
+        <h1 class="text-3xl font-bold text-center">Упражнение для памяти</h1>
+        <nav class="mt-4 flex justify-center space-x-4">
+            <a href="/profile" class="text-gray-300 hover:text-blue-400">Профиль</a>
+            <a href="/test" class="text-gray-300 hover:text-blue-400">Упражнения</a>
+            <a href="/leaderboard" class="text-gray-300 hover:text-blue-400">Таблица лидеров</a>
+            <a href="/about" class="text-gray-300 hover:text-blue-400">О проекте</a>
+        </nav>
+    </header>
+    
+    <header class="p-4 z-100 mb-6 w-full h-15 place-self-center sticky  top-0 right-0 left-0 rounded-lg justify-items-stretch display sm:hidden ">
+        <div class="  backdrop-blur-md grid grid-cols-2 w-full h-15 p-2 bg-gray-800">
+            <div>
+                <a href="/profile">
+                    <svg class="w-10 h-10  text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M4 4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H4Zm10 5a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm0 3a1 1 0 0 1 1-1h3a1 1 0 1 1 0 2h-3a1 1 0 0 1-1-1Zm-8-5a3 3 0 1 1 6 0 3 3 0 0 1-6 0Zm1.942 4a3 3 0 0 0-2.847 2.051l-.044.133-.004.012c-.042.126-.055.167-.042.195.006.013.02.023.038.039.032.025.08.064.146.155A1 1 0 0 0 6 17h6a1 1 0 0 0 .811-.415.713.713 0 0 1 .146-.155c.019-.016.031-.026.038-.04.014-.027 0-.068-.042-.194l-.004-.012-.044-.133A3 3 0 0 0 10.059 14H7.942Z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+                  
+            </div>
+             <!-- для профиля -->
+            <div class="h-full accordion-toggle justify-self-end place-self-center shadow  w-10 bg-gray-700 rounded-md transition duration-200 ease-in-out active:bg-gray-500">
+                <svg class="w-10 h-10 transition-all justify-self-center place-self-center text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M5 7h14M5 12h14M5 17h14"/>
+                </svg>
+                  
+            </div>
+        </div>
+        <div id="cord" class=" z-10 accordion-content overflow-hidden transition-all duration-200 sticky backdrop-blur-md bg-gray-800 max-h-0 bg">
+            <!-- <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-[#c4ab873b]"><a href="/profile" class="w-full h-full">Профиль</a></h1> -->
+            <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-gray-700"><a href="/test" class="w-full h-full">Упражнения</a></h1>
+            <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-gray-700"><a href="/leaderboard" class="w-full h-full">Таблица лидеров</a></h1>
+            <h1 class="place-self-center text-xl font-light mx-3 p-2 w-full transition duration-200 active:bg-gray-700"><a href="Calculator.html" class="w-full h-full">О проекте</a></h1>
+            
+            
+        </div>
+        
+    </header>
+    <h1 class="place-self-center m-8 font-bold text-4xl">Запоминание слов</h1>
+    <h1 id="t" class="place-self-center text-center w-1/2 text-gray-400">Нажатие кнопки запустит тест, после этого вам будет отведено 2 минуты на запоминание слов после чего вам надо будет выбрать из списка слова которые вы запомнили (каждое неправильно выбранное слово будет отнимать 1 балл)</h1>
+    <div  class="place-self-center content-center h-auto">
+        <button  id="but" class="place-self-center w-48 h-24 mt-16  bg-blue-500 rounded-lg text-3xl font-bold transition duration-300 delay-50 ease-in-out hover:bg-blue-600">Старт!</button>
+
+    </div>
+    <div id="words-grid-1" class="bg-gray-700 gap-3 mt-6  grid grid-cols-6 grid-rows-4 content-center place-self-center rounded-lg hidden">
+    </div>
+    <div id="words-grid-2" class="bg-gray-700 gap-3 mt-6  grid grid-cols-6 grid-rows-4 content-center place-self-center rounded-lg hidden"></div>
+    <div  class="place-self-center content-center h-auto">
+        <button  id="but_send" class="place-self-center w-48 h-24 mt-16  bg-blue-500 rounded-lg text-3xl font-bold transition duration-300 delay-50 ease-in-out hover:bg-blue-600">Отправить!</button>
+
+    </div>
+    <div id="timer" class="place-self-center w-32 h-32 bg-gray-600 rounded-lg text-4xl text-center content-center m-8 hidden">
+        <h1 id="timerr" class="text-6xl">60</h1>
+    </div>
+    <div id="result-desk" class="place-self-center w-96 h-70 bg-gray-800 mt-10 text-center p-6 rounded-3xl hidden">
+        <p class="text-3xl font-semibold">Ваш результат:</p>
+        <p id="res-score" class="text-6xl font-semibold my-7">12 из 12</p>
+        
+        <a href="/test" class=" rounded-lg bg-blue-500 text-2xl font-bold p-2">На главную</a>
+        <p class="font-light text-sm mt-5 text-gray-400">*все результаты можно посмотреть в профиле</p>
+    </div>
+    
+
+    <script>
+        let but = document.getElementById("but");
+        let but2 = document.getElementById("but_send");
+        let words_prime = Array();
+        let t = document.getElementById("t")
+        let res_desk = document.getElementById("result-desk")
+        let grid = document.getElementById("words-grid-1");
+        let grid2 = document.getElementById("words-grid-2");
+        let words_sec = Array();
+        let tim = 120;
+        but2.hidden = true;
+        function change_color()
+        {   
+            
+            if(this.className == "text-xl text-center place-self-center  p-6 rounded-lg w-full bg-green-600")
+            {
+                this.className = "text-xl text-center place-self-center  p-6 rounded-lg w-full bg-gray-600";
+            }
+            else{
+                this.className = "text-xl text-center place-self-center  p-6 rounded-lg w-full bg-green-600";
+            }
+            
+            
+        }
+        function shuffle(array)
+        {
+            let newArray = array
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+        but.addEventListener("click", ()=>{
+            t.className+=" hidden"
+            fetch("/api/24").then(res=>res.json()).then((res)=>{
+                console.log(res);
+                
+                for(let i = 0; i<100 ;i++)
+                {
+                    console.log(typeof res);
+                    words_prime.push(res["words"][i]);
+                    
+                }
+                shuffle(words_prime);
+                for(let i = 0;i<24;i++)
+                {
+                    words_sec.push(words_prime[i]);
+                }
+            }).then(()=>{
+                but.hidden=true
+                grid.className = grid.className.slice(0,-6)
+                document.getElementById("timer").className = document.getElementById("timer").className.slice(0,-6)
+                
+                for(let i = 0;i<24;i++)
+                {
+                    let span_buf = document.createElement("span");
+                    span_buf.className = "text-xl text-center place-self-center  p-6 rounded-lg bg-gray-600 w-full"
+                    span_buf.textContent = words_prime[i];
+                    console.log(words_sec[i]);
+                    grid.appendChild(span_buf);
+
+                }
+                setInterval(()=>{
+                    let timer = document.getElementById("timer");
+                    tim-=1;
+                    timer.textContent = tim.toString();
+                    if(tim == 0)
+                    {
+                        timer.className += "hidden";
+                        grid.className += "hidden";
+                        shuffle(words_sec);
+                        words_buf = Array();
+                        for(let i=0;i<24;i++)
+                        {
+                            if(i%2 == 0)
+                            {
+                                words_buf.push(words_prime[i+24]);
+                                
+                            }
+                            else
+                            {
+                                words_buf.push(words_sec[i])
+                            }
+                        }
+                        shuffle(words_buf);
+                        grid2.className = grid2.className.slice(0,-6);
+                        for(let i = 0; i<24;i++)
+                        {
+                            let span1 = document.createElement("span");
+                            span1.className = "text-xl text-center place-self-center  p-6 rounded-lg w-full bg-gray-600"
+                            span1.textContent = words_buf[i];
+                            console.log(span1.textContent)
+                            grid2.appendChild(span1);
+                            
+                        }
+                        spans = document.getElementsByTagName("span");
+                        for(let i = 0;i<spans.length;i++)
+                        {
+                            const spann = spans[i]
+                            spann.addEventListener("click", change_color)
+                        }
+                        but2.hidden = false;
+                        
+                        
+                    }
+                },1000);
+                
+            })
+
+
+        })
+        but2.addEventListener("click",()=>{
+            let csrftoken = "";
+            for(let i = document.cookie.toString().indexOf("csrftoken=")+10;i<document.cookie.length;i++)
+            {
+                if(document.cookie[i] != ";")
+                {
+                    csrftoken+=document.cookie[i];
+                        
+                }
+                else
+                {
+                        
+                    break;
+                }
+            }
+
+            let grid2_child = grid2.children
+            let words_send = 0
+            for(let i = 0; i<grid2_child.length;i++)
+            {
+                if( grid2_child[i].className ==  "text-xl text-center place-self-center  p-6 rounded-lg w-full bg-green-600" &&  words_sec.includes(grid2_child[i].textContent))
+                {
+                    words_send++;
+                }
+                else if(grid2_child[i].className ==  "text-xl text-center place-self-center  p-6 rounded-lg w-full bg-green-600")
+                {
+                    words_send--;
+                }
+            }
+                
+
+            fetch("/words",{
+                method:"POST",
+                headers:
+                {
+                    'Content-Type':'application/json',
+                    'X-CSRFToken':csrftoken
+                },
+                body:JSON.stringify(
+                {
+                    'score':words_send
+                        
+                })
+            }).then((result)=>{
+                console.log(result)
+                return result.json()
+            }).then((res)=>
+            {
+                console.log(res)
+                res_desk.className = "place-self-center w-96 h-70 bg-gray-800 mt-10 text-center p-6 rounded-3xl"
+                let res_t = document.getElementById("res-score")
+                res_t.textContent = res["result"] + " из 12"
+                grid2.className += " hidden"
+                but2.className += " hidden"
+                
+
+            })
+        })
+    </script>
+</body>
+</html>

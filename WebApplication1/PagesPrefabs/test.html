@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .input-title
+        {
+            width: 200px;
+            margin-right: 5vW;
+            font-size: 24px;
+            font-weight: 500;
+
+        }
+        input
+        {
+            border:2px solid #FFFFFF;
+            border-radius: 5px 5px 5px 5px;
+            padding: 10px 15px;
+            background-color: transparent;
+            color: #FFFFFF;
+            font-family: inherit;
+            font-weight: 300px;
+            width: 350px;
+            transition: border 0.2s, transform 0.4s;
+        }
+        input:focus
+        {
+            border: 2px solid aqua;
+            transform: rotate(20%);
+            outline: none;
+        }
+        body
+        {
+            background-color: #2a2a2a;
+            font-family:sans-serif;
+            color:#FFFFFF;
+            justify-content: center;
+            padding:2px;
+            align-items: center;
+
+        }
+        .box
+        {
+            border: 2px solid aqua;
+            margin-top: 10vW;
+            margin-left: 5vW;
+            margin-right: 5vW;
+            padding: 2vW;
+            border-radius: 20px;
+            align-items: center;
+            
+        }
+        label
+        {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        .sub
+        {
+            border: 4px solid red;
+
+            transition:  transform 0.4s;
+        }
+        .sub:hover
+        {
+
+            transform: scale(150%);
+            transform: translateX(200px);
+        }
+        .butt
+        {
+            border: 2px solid #FFFFFF;
+            border-radius: 3px;
+            weight: 100px;
+            height: 50px;
+            transition:  transform 0.4s, background-color 0.2s, color 0.2s, border 0.2s, border-radius 0.2s;
+        }
+        .butt:active
+        {
+            transform: scale(80%);
+            background-color: #484848;
+            color: #FFFFFF;
+            border: 1px solid #484848;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">Register</h1>
+    <div class="box">
+        <label>
+            <button class="butt" id="but">ClICK!
+            </button>
+            <span id="text"></span>
+        </label>
+        <label>
+            <input type="text" id="name">
+        </label>
+
+        <button class="butt" id="SUB">click here to upload your result</button>
+        <button class="butt" id="butget">CLICK HERE!</button>
+        <span id="input_text"></span>
+
+    <script>
+        const disp = document.getElementById("text")
+        let but = document.getElementById("but")
+        const input_w = document.getElementById("name")
+        let but1 = document.getElementById("butget")
+        const inputdisp = document.getElementById("input_text")
+        
+        disp.textContent = "0"
+        function clicker(event)
+        {
+            let prev = parseInt(disp.textContent)+1
+            disp.textContent = prev
+            console.log(parseInt(prev)+1)
+        }
+        but.addEventListener("click", clicker)
+        
+        but1.addEventListener("click", get)
+
+        function getToken(name){
+            let cookievalue = null
+            if(document.cookie && document.cookie!=""){
+                const cookies = document.cookie.split(";")
+                for(let i = 0; i < cookies.length; i++){
+                    const cookie = cookies[i].trim();
+                    if(cookie.substring(0,name.length+1)===(name+"=")){
+                        cookievalue = decodeURIComponent(cookie.substring(name.length+1))
+                        break
+                    }
+
+                }
+            }
+            return cookievalue
+
+        }
+        function send()
+        {
+            var csrftoken = getToken("csrftoken")
+            console.log(csrftoken)
+
+            var url = "/api"
+            fetch(url,{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json',
+                    'X-CSRFToken':csrftoken
+                },
+                body:JSON.stringify({'post_data': disp.textContent, "post_name": input_w.value})
+            })
+            .then((response)=>{
+                return response.json()
+            })
+            .then((data)=>{
+                console.log(data)
+            })
+        }
+        function get()
+        {
+            var csrftoken = getToken('csrftoken')
+            fetch("/api",{
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json',
+                    'X-csrftoken':csrftoken
+                }
+
+            })
+            .then((response)=> response.json()).then((data)=> disp.textContent = data['user'])
+
+        }
+
+        const sub = document.getElementById("SUB")
+        sub.addEventListener("click", send)
+    </script>
+    </div>
+</body>
+</html>
