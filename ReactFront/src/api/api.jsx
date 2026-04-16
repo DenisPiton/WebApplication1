@@ -5,7 +5,7 @@ import axios from 'axios';
 //const API_BASE_URL = 'http://localhost:5199/';
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
   ? '/api'  // В production используем относительный путь (прокси через nginx)
-  : 'http://localhost:5199/';  // В development
+  : 'https://memorydevelopingsitefinalversion.onrender.com';  // В development
 
 
 const api = axios.create({
