@@ -42,7 +42,7 @@ namespace WebApplication1
                 options.AddPolicy("AllowReactApp",
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:3000", "https://vercel.app")
+                        policy.WithOrigins("http://localhost:3000", "https://vercel.app", "https://memory-developing-site-final-versio.vercel.app")
                               .AllowAnyHeader()
                               .AllowAnyMethod()
                               .AllowCredentials();
