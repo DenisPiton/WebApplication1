@@ -7,7 +7,6 @@
 *.rsuser
 *.suo
 appsettings.json
-Migrations
 *.user
 PagePrefabs
 *.userosscache
